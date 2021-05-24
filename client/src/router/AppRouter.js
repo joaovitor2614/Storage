@@ -1,16 +1,12 @@
-import React, { Fragment, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch, Link, NavLink } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CashFlow from '../components/cashflow/CashFlow';
 import Storage from '../components/dashboard/Storage'
 
 import { ToastContainer } from 'react-toastify'
 import StorageHistory from '../components/history/StorageHistory';
-import Login from '../components/auth/Login';
-import setAuthToken from '../utils/setAuthToken';
-import { loadUser } from '../actions/auth';
-import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
+
+
 import SideBar from '../components/layout/SideBar';
 import Client from '../components/client/Client';
 import AddClient from '../components/client/AddClient';
@@ -20,6 +16,7 @@ import Profile from '../components/client/profile/Profile';
 import Bills from '../components/bills/Bills';
 import AddBill from '../components/bills/AddBill';
 import EditBill from '../components/bills/EditBill';
+import Footer from '../components/layout/footer/Footer';
 
 
 
@@ -27,24 +24,10 @@ import EditBill from '../components/bills/EditBill';
 
 
 const AppRouter = () => {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
 
-   const dispatch = useDispatch()
-    useEffect(() => {
-      
 
-        // checkar token no LS
-        if (localStorage.token) {
-          setAuthToken(localStorage.token);
-        }
-        dispatch(loadUser());
-    
-        // deslogar user de tds as tabs se ele se deslogar de uma
-        window.addEventListener('storage', () => {
-          if (!localStorage.token) dispatch({ type: LOGOUT });
-        });
-      }, []);
+   
     return(
     <Router >
         
@@ -60,24 +43,25 @@ const AppRouter = () => {
                     draggable
                     pauseOnHover
                 />
-        {isAuthenticated && <SideBar />}
+        <SideBar />
        
            
             
   
                 <Switch>
-                    <PublicRoute exact path='/' component={Login} />
-                    <PrivateRoute exact path="/storage" component={Storage} />
-                    <PrivateRoute exact path="/cashflow" component={CashFlow} />
-                    <PrivateRoute exact path="/client" component={Client} />
-                    <PrivateRoute exact path="/update-client/:id" component={EditClient} />
-                    <PrivateRoute exact path="/add-client"  component={AddClient} />
-                    <PrivateRoute exact path="/storage-history" component={StorageHistory} />
-                    <PrivateRoute exact path="/history/:id" component={Profile} />
-                    <PrivateRoute exact path="/bills" component={Bills} />
-                    <PrivateRoute exact path="/add-bill" component={AddBill} />
-                    <PrivateRoute exact path="/edit-bill/:id" component={EditBill} />
+              
+                    <Route exact path="/" component={Storage} />
+                    <Route exact path="/cashflow" component={CashFlow} />
+                    <Route exact path="/client" component={Client} />
+                    <Route exact path="/update-client/:id" component={EditClient} />
+                    <Route exact path="/add-client"  component={AddClient} />
+                    <Route exact path="/storage-history" component={StorageHistory} />
+                    <Route exact path="/history/:id" component={Profile} />
+                    <Route exact path="/bills" component={Bills} />
+                    <Route exact path="/add-bill" component={AddBill} />
+                    <Route exact path="/edit-bill/:id" component={EditBill} />
                 </Switch >
+                <Footer />
        
 
         </Fragment>

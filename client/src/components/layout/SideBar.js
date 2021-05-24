@@ -42,7 +42,7 @@ const SideBar = () => {
             <Sidebar classes='side-bar' bgColor='black' isCollapsed={!isOpen}>
                 <div className='side-bar__box'>
                 
-                    <Item classes='side-bar__item' onClick={() => handleLinks('storage')} bgColor='black'>
+                    <Item classes='side-bar__item' onClick={() => handleLinks('')} bgColor='black'>
                         <StorageIcon />
                         Estoque
                     </Item>

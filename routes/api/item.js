@@ -1,13 +1,15 @@
 const express = require('express');
 
-const auth = require('../../middlewares/auth')
+
 const { check, validationResult } = require('express-validator');
 const Item = require('../../models/Item');
 const router = express.Router();
 
+
+
 //@method POST /api/items
 //desc Adicionar item/items ao estoque
-router.post('/', auth, check('name', 'Nome do item é necessário').notEmpty(),
+router.post('/', check('name', 'Nome do item é necessário').notEmpty(),
                       
                        check('pricePerUnit', 'Preço por unidade é necessário')
                        .notEmpty(),
@@ -40,7 +42,7 @@ router.post('/', auth, check('name', 'Nome do item é necessário').notEmpty(),
 
 //@method GET /api/items
 //desc Pegar todos os items
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
                 const items = await Item.find().sort({ date: -1 });
                 if (!items) {
                     return res.status(400).json({ msg: 'Items não foram encontrados'})
@@ -57,7 +59,7 @@ router.get('/', auth, async (req, res) => {
 
 //@method GET /api/items/item/post_id
 //desc achar e editar item
-router.post('/edit/:item_id', auth, async (req, res) => {
+router.post('/edit/:item_id', async (req, res) => {
     const { item_id } = req.params
     console.log('item_id', item_id)
    
@@ -76,7 +78,7 @@ router.post('/edit/:item_id', auth, async (req, res) => {
 
 //@method GET /api/items/post_id
 //desc achar e remover item
-router.delete('/:item_id', auth, async (req, res) => {
+router.delete('/:item_id', async (req, res) => {
     const { item_id } = req.params
   
    
@@ -95,7 +97,7 @@ router.delete('/:item_id', auth, async (req, res) => {
 
 //@method GET /api/items/sales
 //desc atualizar estoque após registro devenda
-router.post('/sales', auth, async (req, res) => {
+router.post('/sales', async (req, res) => {
     const { products } = req.body;
     
    
@@ -148,7 +150,7 @@ router.post('/sales', auth, async (req, res) => {
 
 //@method GET /api/item/name/:product_id
 //desc Query de item por nome
-router.post('/name', auth, async (req, res) => {
+router.post('/name', async (req, res) => {
     const { name } = req.body                  
     
     

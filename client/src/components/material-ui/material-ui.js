@@ -51,6 +51,10 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import EmailIcon from '@material-ui/icons/Email';
 
 export { Select, EditIcon, MenuItem, InputLabel, makeStyles, 
     Button, Paper, TextField, AttachMoneyIcon, SearchIcon,
@@ -62,4 +66,5 @@ StorageIcon, AssessmentIcon, BusinessCenterIcon, ExitToAppIcon,
 Box, Grid, PersonAddIcon, DashboardIcon, ReceiptIcon, PostAddIcon,
 ArrowDownwardIcon, ArrowUpwardIcon, RestorePageIcon, 
 MenuList, Popper, ClickAwayListener, Grow, Typography, 
-KeyboardArrowDownIcon, KeyboardArrowUpIcon, TimelineIcon, HighlightOffIcon }
+KeyboardArrowDownIcon, KeyboardArrowUpIcon, 
+TimelineIcon, HighlightOffIcon, GitHubIcon, WhatsAppIcon, LinkedInIcon, EmailIcon}

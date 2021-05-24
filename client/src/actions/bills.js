@@ -47,7 +47,7 @@ export const getBills = () => async dispatch => {
 export const addBill = (data) => async dispatch => {
     try {
         const res = await api.post('/receipt', data);
-       console.log('bill res data', res.data)
+      
         dispatch({
             type: 'ADD_BILL',
             payload: res.data

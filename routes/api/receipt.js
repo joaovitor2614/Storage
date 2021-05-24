@@ -1,13 +1,11 @@
-const express = require('express');
-
-const auth = require('../../middlewares/auth')
+const express = require('express')
 const { check, validationResult } = require('express-validator');
 const Receipt = require('../../models/Receipt');
 const router = express.Router();
 
 //@method GET /api/receipt/:client_id
 //desc Pegar notas por id
-router.get('/:receipt_id', auth, async (req, res) => {
+router.get('/:receipt_id', async (req, res) => {
     let { receipt_id } = req.params
     try {
         const receipt = await Receipt.findOne({ _id: receipt_id });
@@ -23,7 +21,7 @@ router.get('/:receipt_id', auth, async (req, res) => {
 
 //@method GET /api/receipt
 //desc Pegar notas a pagar
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   
     try {
          const receipts = await Receipt.find().sort({ date: -1 });
@@ -39,7 +37,7 @@ router.get('/', auth, async (req, res) => {
 
 //@method POST /api/receipt
 //desc Adicionar notas a pagar
-router.post('/', auth, check('value', 'Nome é necessário').notEmpty(),
+router.post('/', check('value', 'Nome é necessário').notEmpty(),
                         check('description', 'Motivo é necessário').notEmpty(),
                         check('forDate', 'Data de pagamento é necessária').notEmpty(),
                             async (req, res) => {
@@ -62,7 +60,7 @@ router.post('/', auth, check('value', 'Nome é necessário').notEmpty(),
 
 //@method DELETE /api/receipt/:receipt_id
 //desc Remover conta a pagar
-router.delete('/:receipt_id', auth, async (req, res) => {
+router.delete('/:receipt_id', async (req, res) => {
     let { receipt_id } = req.params
     try {
          await Receipt.findByIdAndRemove(receipt_id)
@@ -76,7 +74,7 @@ router.delete('/:receipt_id', auth, async (req, res) => {
 
 //@method PUT /api/client/:client_id
 //desc Editar contas a pagar
-router.put('/:receipt_id', auth, async (req, res) => {
+router.put('/:receipt_id', async (req, res) => {
     let { receipt_id } = req.params
     try {
          await Receipt.findByIdAndUpdate(receipt_id, req.body);

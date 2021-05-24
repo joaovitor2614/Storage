@@ -1,13 +1,13 @@
 const express = require('express');
 
-const auth = require('../../middlewares/auth')
+
 const { check, validationResult } = require('express-validator');
 const Client = require('../../models/Client');
 const router = express.Router();
 
 //@method GET /api/client/:client_id
 //desc Pegar cliente por id
-router.get('/:client_id', auth, async (req, res) => {
+router.get('/:client_id', async (req, res) => {
     let { client_id } = req.params
     try {
         const client = await Client.findOne({ _id: client_id });
@@ -23,7 +23,7 @@ router.get('/:client_id', auth, async (req, res) => {
 
 //@method GET /api/client
 //desc Pegar clientes
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   
     try {
          const clients = await Client.find().sort({ date: -1 });
@@ -39,7 +39,7 @@ router.get('/', auth, async (req, res) => {
 
 //@method GET /api/client/history/:client_id
 //desc Pegar historico do cliente
-router.get('/history/:client_id', auth, async (req, res) => {
+router.get('/history/:client_id', async (req, res) => {
     const { client_id } = req.params
     try {
          const client = await Client.findOne({ _id: client_id })
@@ -55,7 +55,7 @@ router.get('/history/:client_id', auth, async (req, res) => {
 
 //@method POST /api/client
 //desc Cadastrar clients
-router.post('/', auth, check('name', 'Nome é necessário').notEmpty(), async (req, res) => {
+router.post('/', check('name', 'Nome é necessário').notEmpty(), async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -74,7 +74,7 @@ router.post('/', auth, check('name', 'Nome é necessário').notEmpty(), async (r
 
 //@method DELETE /api/client/:client_id
 //desc Remover clientes
-router.delete('/:client_id', auth, async (req, res) => {
+router.delete('/:client_id', async (req, res) => {
     let { client_id } = req.params
     try {
          await Client.findByIdAndRemove(client_id)
@@ -88,7 +88,7 @@ router.delete('/:client_id', auth, async (req, res) => {
 
 //@method PUT /api/client/:client_id
 //desc Editar clientes
-router.put('/:client_id', auth, async (req, res) => {
+router.put('/:client_id', async (req, res) => {
     let { client_id } = req.params
     try {
          await Client.findByIdAndUpdate(client_id, req.body);
@@ -105,7 +105,7 @@ router.put('/:client_id', auth, async (req, res) => {
 
 //@method POST /api/client/history/:client_id
 //desc Adicionar compra ao historico do cliente
-router.post('/history/:client_id', auth, check('balance', 'Balanço total é necessário').notEmpty(),
+router.post('/history/:client_id', check('balance', 'Balanço total é necessário').notEmpty(),
                 check('products', 'Produtos da compra são necessários').notEmpty(), 
    
     async (req, res) => {
@@ -133,7 +133,7 @@ router.post('/history/:client_id', auth, check('balance', 'Balanço total é nec
 
 //@method DELETE /api/client/history/:client_id/:history_id
 //desc remover compra do historico do cliente
-router.delete('/history/:client_id/:history_id', auth, 
+router.delete('/history/:client_id/:history_id', 
    
     async (req, res) => {
 
@@ -158,7 +158,7 @@ router.delete('/history/:client_id/:history_id', auth,
 
 //@method POST /api/client/query
 //desc Query de clientes por nome
-router.post('/query', auth,  async (req, res) => {
+router.post('/query', async (req, res) => {
     const { name } = req.body
     try {
         const clients = await Client.find({ name: { $regex: `${name}`, $options: "g" }});

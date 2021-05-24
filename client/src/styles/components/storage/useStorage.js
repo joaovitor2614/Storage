@@ -10,7 +10,7 @@ export const useStorageTable = makeStyles(() => ({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: '100px',
-        marginLeft: '25px'
+        marginLeft: '41px'
     },
     paper: {
         width: '1200px'

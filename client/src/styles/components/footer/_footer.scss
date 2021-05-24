@@ -1,0 +1,27 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 95vw;
+    background: #1c1e2a;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+     justify-content: space-between;
+    vertical-align: middle;
+    padding: 20px 35px;
+    
+ 
+}
+
+.footer__media {
+    display: flex;
+    margin-left: 38px;
+    vertical-align: middle;
+   
+    
+}
+
+.footer__media * {
+    margin: 0 10px;
+
+}
