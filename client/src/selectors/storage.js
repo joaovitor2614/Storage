@@ -46,8 +46,10 @@ function filterByCategory(byCategory, item) {
 // função para filtrar items dinamicamente
 export default (items, { byName, byCategory, byVu, byQe }) => {
     return items.filter((item) => {
+      console.log('item', item)
       const textMatch = item.name.toLowerCase().includes(byName.toLowerCase());
       const categoryMatch = item.category.toLowerCase().includes(byCategory.toLowerCase());
+      
       
       return textMatch && filterByCategory(byCategory, item) && filterByQe(item, byQe);
     })
